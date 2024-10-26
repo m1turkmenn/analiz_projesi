@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ana Sayfa</title>
+    <link rel="stylesheet" href="{% static 'duygu_analizi/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Sosyal Medya Duygu Analizi</h1>
+        <p>Bu sayfa üzerinden duygu analizini gerçekleştirebilirsiniz.</p>
+
+        <form method="POST" action="{% url 'duygu_analizi:analiz' %}">
+            {% csrf_token %}
+            <textarea name="metin" rows="4" placeholder="Metni buraya yazın..." required></textarea>
+            <button type="submit">Analiz Et</button>
+        </form>
+
+        <div id="result">
+            {% if sonuc %}
+                <h2>Analiz Sonucu:</h2>
+                <p>{{ sonuc }}</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
